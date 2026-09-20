@@ -9,3 +9,5 @@ export const GlobalConstant = {
         MOBILE_NO : 'Max and Min 10 Char Needed'
      }
 };
+
+// with the help of pipe we can read the constant data in the HTML.
