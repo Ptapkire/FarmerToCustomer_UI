@@ -1,10 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { UserLogin } from '../../core/models/classes/User.Model';
 import { UserService } from '../../core/services/user-service';
+import { Roles } from '../../core/enums/Roles.enum';
+import { CommonImports } from '../../core/constant/CommonImports';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [CommonImports.FORM_IMPORTS],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -14,11 +16,13 @@ export class Login {
 
     loginObj : UserLogin = {
        userName: '',
-       password: ''
+       password: '',
+       role : 0
     }
 
     onLogin(){
        const loginDat = {};
+       this.loginObj.role = Roles.Farmer;
        this.userSrv.login(this.loginObj).subscribe({
 
        })
