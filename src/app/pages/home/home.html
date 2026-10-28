@@ -1,1 +1,144 @@
-<p>home works!</p>
+<section class="py-5" id="cats">
+  <div class="container">
+    <h2 class="mb-4">Shop by category</h2>
+    <div class="row g-3">
+      <div class="col-6 col-md-3"><div class="cat" onclick="setCat('leafy')"><div class="e">🥬</div><strong>Leafy &amp; herbs</strong><div class="small muted">Dhaniya, palak, methi</div></div></div>
+      <div class="col-6 col-md-3"><div class="cat" onclick="setCat('root')"><div class="e">🥔</div><strong>Root vegetables</strong><div class="small muted">Potato, onion, carrot</div></div></div>
+      <div class="col-6 col-md-3"><div class="cat" onclick="setCat('fv')"><div class="e">🍅</div><strong>Fruit vegetables</strong><div class="small muted">Tomato, brinjal, okra</div></div></div>
+      <div class="col-6 col-md-3"><div class="cat" onclick="setCat('all')"><div class="e">🧺</div><strong>All products</strong><div class="small muted">Everything listed today</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS + BANNER HTML (START) ===== -->
+<section class="pb-5" id="shop">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <div>
+        <div class="eyebrow">FRESH PICKS</div>
+        <h2 class="mb-0" id="rtitle">Products from Local Farmers</h2>
+        <p class="muted mb-0 mt-1" id="rsub"></p>
+      </div>
+      <button class="btn btn-viewall" onclick="viewAll()">View All →</button>
+    </div>
+    <div id="results" class="row g-4"></div>
+  </div>
+</section>
+
+<section class="pb-5" id="banner">
+  <div class="container">
+    <div class="farm-banner">
+      <div>
+        <span class="pill">FOR FARMERS</span>
+        <h2>Grow it. List it. <em>Sell it direct.</em></h2>
+        <p>Register your farm, list what you will harvest this week, and receive orders straight from customers. No middleman.</p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <button class="btn btn-cta">Register as a farmer</button>
+          <button class="btn btn-ghost">How it works</button>
+        </div>
+      </div>
+      <div class="bn-art d-none d-md-flex" aria-hidden="true">🧑‍🌾<span>🌾</span><span>🥕</span></div>
+    </div>
+  </div>
+</section>
+<!-- ===== PRODUCTS + BANNER HTML (END) ===== -->
+
+<section class="py-5" id="roles">
+  <div class="container">
+    <h2 class="mb-4">Four roles, one portal</h2>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-3"><div class="card-t p-4 h-100"><div class="role-ico">🛡️</div><h5>Super admin</h5><p class="muted mb-0">Creates categories and the master product list. Approves farmers.</p></div></div>
+      <div class="col-md-6 col-lg-3"><div class="card-t p-4 h-100"><div class="role-ico">🧑‍🌾</div><h5>Farmer</h5><p class="muted mb-0">Picks products from the master list, sets price, quantity and ready date.</p></div></div>
+      <div class="col-md-6 col-lg-3"><div class="card-t p-4 h-100"><div class="role-ico">🛒</div><h5>Customer</h5><p class="muted mb-0">Searches, compares farmers, and adds items from many farmers to one cart.</p></div></div>
+      <div class="col-md-6 col-lg-3"><div class="card-t p-4 h-100"><div class="role-ico">📦</div><h5>Order split</h5><p class="muted mb-0">One checkout becomes separate orders, each sent to its own farmer.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CART DRAWER HTML (START) ===== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartCanvas" aria-labelledby="cartTitle">
+  <div class="offcanvas-header">
+    <h5 class="mb-0" id="cartTitle">Your cart</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="cart" class="flex-grow-1"></div>
+    <button class="btn btn-cta w-100 mt-3" id="place" disabled>Place order</button>
+  </div>
+</div>
+<!-- ===== CART DRAWER HTML (END) ===== -->
+
+<!-- ===== JAVASCRIPT (START) ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Replace this array with data from your backend (farmer product listings)
+const P=[
+ {id:1,title:'Organic Potatoes',item:'Potato',name:'Ramesh Pawar',loc:'Baramati',price:28,unit:'kg',badge:'FRESH',b:'o',cat:'root',e:'🥔',img:'images/potato.jpg'},
+ {id:2,title:'Fresh Potatoes',item:'Potato',name:'Sunita Jadhav',loc:'Indapur',price:25,unit:'kg',badge:'HOT DEAL',b:'o',cat:'root',e:'🥔',img:'images/potato.jpg'},
+ {id:3,title:'Farm Potatoes',item:'Potato',name:'Green Acres Co-op',loc:'Daund',price:30,unit:'kg',badge:'ORGANIC',b:'g',cat:'root',e:'🥔',img:'images/potato.jpg'},
+ {id:4,title:'Fresh Coriander',item:'Dhaniya',name:'Vikas Shinde',loc:'Phaltan',price:12,unit:'bunch',badge:'ORGANIC',b:'g',cat:'leafy',e:'🌿',img:'images/coriander.jpg'},
+ {id:5,title:'Fresh Coriander',item:'Dhaniya',name:'Meena Kale',loc:'Saswad',price:10,unit:'bunch',badge:'FRESH',b:'o',cat:'leafy',e:'🌿',img:'images/coriander.jpg'},
+ {id:6,title:'Fresh Tomatoes',item:'Tomato',name:'Anil More',loc:'Jejuri',price:22,unit:'kg',badge:'HOT DEAL',b:'o',cat:'fv',e:'🍅',img:'images/tomato.jpg'},
+ {id:7,title:'Red Onions',item:'Onion',name:'Ramesh Pawar',loc:'Baramati',price:26,unit:'kg',badge:'FRESH',b:'o',cat:'root',e:'🧅',img:'images/onion.jpg'},
+ {id:8,title:'Baby Spinach',item:'Palak',name:'Kavita Gaikwad',loc:'Phaltan',price:22,unit:'kg',badge:'ORGANIC',b:'g',cat:'leafy',e:'🥬',img:'images/spinach.jpg'}
+];
+const cart=[];
+const I={
+ user:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>',
+ box:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>',
+ cart:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 002 1.6h8a2 2 0 002-1.5L21 8H6"/></svg>'
+};
+function doSearch(scroll){
+  const q=document.getElementById('q').value.trim(), t=q.toLowerCase(), c=document.getElementById('cat').value;
+  const list=P.filter(p=>(!t||(p.title+' '+p.item).toLowerCase().includes(t))&&(c==='all'||p.cat===c));
+  document.getElementById('rtitle').textContent=q?`Results for “${q}”`:'Products from Local Farmers';
+  document.getElementById('rsub').textContent=q||c!=='all'?(list.length?`${list.length} listing${list.length>1?'s':''} from local farmers.`:'No farmer has listed this yet.'):'';
+  document.getElementById('results').innerHTML=list.map(f=>`
+  <div class="col-sm-6 col-lg-4 col-xl-3"><article class="pcard">
+    <div class="pimg" data-e="${f.e}">
+      <img src="${f.img}" alt="${f.title}" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()">
+      <span class="badge-t badge-${f.b}">${f.badge}</span>
+    </div>
+    <div class="pbody">
+      <h5>${f.title}</h5>
+      <div class="farmer">${I.user}<span>${f.name} · ${f.loc}</span></div>
+      <div class="d-flex justify-content-between align-items-end my-1">
+        <div class="price">₹${f.price}<small>/${f.unit}</small></div>
+        <div class="stock">${I.box} In Stock</div>
+      </div>
+      <button class="btn btn-addcart" onclick="add(${f.id},this)">${I.cart} Add to Cart</button>
+    </div>
+  </article></div>`).join('');
+  if(scroll)document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+function viewAll(){document.getElementById('q').value='';document.getElementById('cat').value='all';doSearch(true)}
+function setCat(c){document.getElementById('cat').value=c;document.getElementById('q').value='';doSearch(true)}
+function add(id,btn){
+  const f=P.find(x=>x.id===id),ex=cart.find(c=>c.id===id);
+  if(ex)ex.qty++;else cart.push({...f,qty:1});
+  renderCart();
+  const old=btn.innerHTML;btn.innerHTML='✓ Added';setTimeout(()=>btn.innerHTML=old,900);
+}
+function qty(id,d){const i=cart.findIndex(c=>c.id===id);cart[i].qty+=d;if(cart[i].qty<1)cart.splice(i,1);renderCart()}
+function renderCart(){
+  const el=document.getElementById('cart');
+  document.getElementById('cnt').textContent=cart.reduce((a,c)=>a+c.qty,0);
+  document.getElementById('place').disabled=!cart.length;
+  if(!cart.length){el.innerHTML='<p class="muted">Your cart is empty. Add items to see how your order splits by farmer.</p>';return}
+  const g={};cart.forEach(c=>(g[c.name]=g[c.name]||[]).push(c));
+  let total=0;
+  el.innerHTML=Object.entries(g).map(([n,items])=>`<div class="cart-group"><div class="small muted mb-1">Order to ${n}</div>`+
+   items.map(i=>{total+=i.qty*i.price;return `<div class="cart-row"><div>${i.e} ${i.title}<div class="small muted">₹${i.price}/${i.unit}</div></div>
+   <div class="mini-qty"><button aria-label="Less" onclick="qty(${i.id},-1)">−</button><span>${i.qty}</span><button aria-label="More" onclick="qty(${i.id},1)">+</button></div>
+   <strong>₹${i.qty*i.price}</strong></div>`}).join('')+`</div>`).join('')+
+   `<div class="d-flex justify-content-between border-top pt-2 mt-2"><strong>Total</strong><strong>₹${total}</strong></div>`;
+}
+document.getElementById('place').onclick=()=>{
+  const n=new Set(cart.map(c=>c.name)).size;
+  alert(n+' separate order(s) sent to '+n+' farmer(s).');
+  cart.length=0;renderCart();
+  bootstrap.Offcanvas.getInstance(document.getElementById('cartCanvas')).hide();
+};
+doSearch(false);renderCart();
+</script>
+<!-- ===== JAVASCRIPT (END) ===== -->

@@ -1,1 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+  --bg:#F1F8F2; --surface:#fff; --ink:#16301F; --muted:#5C7366; --line:#D5E5D9;
+  --primary:#1F6B3F; --primary-ink:#fff;
+  --hero:linear-gradient(135deg,#1E5240 0%,#2F7A5B 55%,#3F8F6B 100%); --hero-ink:#fff;
+  --hl:#F9A66C; --cta:#F9A66C; --cta-ink:#3A1A05; --footer:#143D2E;
+  --font-head:'Nunito',sans-serif; --font-body:'Nunito',sans-serif; --radius:16px; --hw:800;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+h1,h2,h3,h4,h5,h6,.brand{font-family:var(--font-head);font-weight:var(--hw)}
+.muted{color:var(--muted)}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--cta);outline-offset:2px}
+.btn-main{background:var(--primary);color:var(--primary-ink);border:0;border-radius:var(--radius);font-weight:700}
+.btn-main:hover{background:var(--primary);color:var(--primary-ink);filter:brightness(1.1)}
+.btn-cta{background:var(--cta);color:var(--cta-ink);border:0;border-radius:999px;font-weight:700;padding:.55rem 1.5rem}
+.btn-cta:hover{background:var(--cta);color:var(--cta-ink);filter:brightness(1.07)}
+.btn-ghost{border:2px solid var(--cta);color:var(--cta);background:transparent;border-radius:999px;font-weight:700;padding:.5rem 1.5rem}
+.btn-ghost:hover{background:var(--cta);color:var(--cta-ink)}
+
+/* hero + nav */
+.hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-10%;top:-30%;width:60%;height:140%;background:radial-gradient(circle,rgba(255,255,255,.10),transparent 65%);pointer-events:none}
+.nav-wrap{background:rgba(0,0,0,.14)}
+.brand{font-size:1.7rem;text-decoration:none;color:var(--hero-ink);letter-spacing:-.02em}
+.brand b{color:var(--hl)}
+.nav-l{color:var(--hero-ink);text-decoration:none;font-weight:600}
+.nav-l:hover{color:var(--hl)}
+.cart-ico{position:relative;color:var(--hero-ink);background:none;border:0;font-size:1.5rem;line-height:1}
+.cart-ico .n{position:absolute;top:-8px;right:-10px;background:var(--cta);color:var(--cta-ink);border-radius:999px;font-size:.7rem;font-weight:800;min-width:20px;height:20px;display:grid;place-items:center}
+.pill{display:inline-block;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.18);color:var(--hl);border-radius:999px;padding:.4rem 1.1rem;font-weight:800;font-size:.85rem;letter-spacing:.04em}
+.hero h1{font-size:clamp(2.4rem,5.4vw,4rem);line-height:1.1;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--hl)}
+.hero .lead{max-width:34rem;opacity:.9;font-size:1.1rem}
+.searchbar{background:var(--surface);color:var(--ink);border-radius:var(--radius);display:flex;align-items:center;gap:.5rem;padding:.45rem .45rem .45rem 1rem;max-width:620px;box-shadow:0 14px 40px rgba(0,0,0,.22)}
+.searchbar input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);outline:none;padding:.5rem 0}
+.searchbar input::placeholder{color:var(--muted)}
+.searchbar select{border:0;border-left:1px solid var(--line);background:transparent;color:var(--ink);padding:.5rem .4rem;outline:none;max-width:140px}
+.searchbar select option{color:#111}
+.stats{display:flex;gap:2rem;flex-wrap:wrap}
+.stats strong{font-size:1.5rem;font-family:var(--font-head);display:block}
+.stats span{opacity:.8;font-size:.9rem}
+
+/* hero art */
+.art{position:relative;max-width:520px;margin-inline:auto;padding:0 0 3rem}
+.collage{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:rgba(255,255,255,.12);padding:10px;border-radius:calc(var(--radius) + 6px);transform:rotate(2deg);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.collage div{aspect-ratio:1;border-radius:var(--radius);display:grid;place-items:center;font-size:clamp(2.2rem,5vw,3.4rem)}
+.float{position:absolute;background:#fff;color:#16301F;border-radius:var(--radius);padding:.7rem 1rem;display:flex;align-items:center;gap:.7rem;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.float .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem}
+.float small{color:#5C7366;display:block;line-height:1.2}
+.f1{top:12%;right:-6%}
+.f2{bottom:0;left:-4%}
+@media(max-width:575px){.f1{right:0}.f2{left:0}}
+
+/* sections */
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem;text-align:center;height:100%;cursor:pointer;transition:transform .2s}
+.cat:hover{transform:translateY(-3px)}
+.cat .e{font-size:2.2rem}
+.chip{background:var(--cta);color:var(--cta-ink);border-radius:999px;padding:.15rem .7rem;font-size:.75rem;font-weight:700}
+/* ===== PRODUCT CARDS + SECTION HEAD + BANNER + CART DRAWER CSS (START) ===== */
+.eyebrow{color:#3F9A6B;font-weight:800;letter-spacing:.14em;font-size:.82rem;margin-bottom:.4rem}
+.btn-viewall{border:1.5px solid var(--primary);color:var(--primary);background:transparent;border-radius:999px;font-weight:700;padding:.55rem 1.5rem}
+.btn-viewall:hover{background:var(--primary);color:var(--primary-ink)}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;height:100%;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(22,48,31,.12)}
+.pimg{position:relative;height:210px;background:var(--line);overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover;display:block}
+.pimg.noimg{display:grid;place-items:center}
+.pimg.noimg::before{content:attr(data-e);font-size:4.2rem}
+.badge-t{position:absolute;top:14px;left:14px;border-radius:999px;padding:.3rem .9rem;font-size:.75rem;font-weight:800;letter-spacing:.05em}
+.badge-o{background:var(--cta);color:var(--cta-ink)}
+.badge-g{background:var(--primary);color:var(--primary-ink)}
+.pbody{padding:1.1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.pbody h5{font-size:1.15rem;margin:0}
+.farmer{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.92rem}
+.price{font-size:1.5rem;font-family:var(--font-head);font-weight:var(--hw);color:var(--primary);line-height:1}
+.price small{font-size:.85rem;font-weight:600;color:var(--muted)}
+.stock{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.88rem}
+.btn-addcart{margin-top:auto;background:var(--primary);color:var(--primary-ink);border:0;border-radius:999px;font-weight:700;padding:.7rem 1rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.btn-addcart:hover{background:var(--primary);color:var(--primary-ink);filter:brightness(1.15)}
+.ico{width:16px;height:16px;flex:none}
+.farm-banner{background:var(--hero);color:var(--hero-ink);border-radius:calc(var(--radius) + 8px);padding:2.8rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;overflow:hidden;position:relative}
+.farm-banner h2{font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.15;margin:1rem 0}
+.farm-banner h2 em{font-style:normal;color:var(--hl)}
+.farm-banner p{max-width:34rem;opacity:.9}
+.bn-art{font-size:6.5rem;line-height:1;display:flex;gap:.4rem;align-items:flex-end;padding-right:1rem}
+.bn-art span{font-size:3.4rem}
+.offcanvas{background:var(--surface);color:var(--ink)}
+.cart-row{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.35rem 0}
+.mini-qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.mini-qty button{border:0;background:var(--bg);color:var(--ink);width:28px;height:28px;font-weight:700}
+.mini-qty span{min-width:30px;text-align:center;font-weight:700;font-size:.9rem}
+/* ===== PRODUCT CARDS + SECTION HEAD + BANNER + CART DRAWER CSS (END) ===== */
+.card-t{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.role-ico{width:46px;height:46px;border-radius:var(--radius);background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:1.4rem;margin-bottom:.8rem}
+.cart-group{border-left:4px solid var(--cta);padding-left:.9rem;margin-bottom:1rem}
+
+/* footer */
+.site-footer{background:var(--footer);color:#DCE8E0}
+.site-footer h6{color:#fff;margin-bottom:1rem}
+.site-footer a{color:#B8CCC0;text-decoration:none}
+.site-footer a:hover{color:var(--hl,#fff)}
+.site-footer .brand{color:#fff}
+.site-footer .brand b{color:var(--cta)}
+.site-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+.social{display:flex;gap:.6rem}
+.social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;color:#fff;font-weight:800;font-size:.85rem}
+.social a:hover{background:var(--cta);color:var(--cta-ink)}
+.nl{display:flex;background:rgba(255,255,255,.08);border-radius:999px;padding:.3rem;margin-top:1rem}
+.nl input{flex:1;min-width:0;background:transparent;border:0;color:#fff;padding:.4rem .9rem;outline:none}
+.nl input::placeholder{color:#9DB5A8}
+.nl button{border-radius:999px;border:0;background:var(--cta);color:var(--cta-ink);font-weight:700;padding:.4rem 1.1rem}
+.ci{display:flex;gap:.7rem;align-items:flex-start}
+.copy{border-top:1px solid rgba(255,255,255,.12);color:#9DB5A8;font-size:.88rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

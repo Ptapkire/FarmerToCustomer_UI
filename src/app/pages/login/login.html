@@ -1,1 +1,204 @@
-<p>login works!</p>
+<div class="parentAuth">
+    <div class="auth">
+
+        <!-- LEFT: brand panel -->
+        <aside class="side">
+            <a class="brand relative-z" href="index.html">Farm<b>Connect</b></a>
+            <div class="relative-z">
+                <h1>From <em>Farm to Table</em>, No Middleman</h1>
+                <ul class="perks">
+                    <li><span class="ic">🧑‍🌾</span><span>Farmers list their harvest and sell directly</span></li>
+                    <li><span class="ic">🛒</span><span>Customers order from many farmers in one cart</span></li>
+                    <li><span class="ic">📦</span><span>Each farmer receives only their part of the order</span></li>
+                </ul>
+            </div>
+            <div class="collage relative-z" aria-hidden="true">
+                <div>🥔</div>
+                <div>🍅</div>
+                <div>🌿</div>
+                <div>🧅</div>
+                <div>🥬</div>
+                <div>🥕</div>
+            </div>
+        </aside>
+
+        <!-- RIGHT: forms -->
+        <main class="main">
+            <div class="box">
+                <div class="mbrand"><a class="brand" href="index.html">Farm<b>Connect</b></a></div>
+                <div class="card-t">
+
+                    <div class="toggle" role="tablist" aria-label="Choose form">
+                        <button type="button" role="tab" id="tab-login" aria-selected="true"
+                            aria-controls="pane-login">Login</button>
+                        <button type="button" role="tab" id="tab-register" aria-selected="false"
+                            aria-controls="pane-register">Register</button>
+                    </div>
+
+                    <!-- LOGIN -->
+                    <section class="pane" id="pane-login" role="tabpanel" aria-labelledby="tab-login">
+                        <h3 class="mb-1">Welcome back</h3>
+                        <p class="muted mb-4">Log in to continue shopping or manage your farm listings.</p>
+                        <form id="loginForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="loginEmail">Email</label>
+                                <input type="email" class="form-control" id="loginEmail" name="email"
+                                   [(ngModel)]="loginObj.email" placeholder="you@example.com" autocomplete="email" required>
+                                <div class="invalid-feedback">Please enter a valid email.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="loginPassword">Password</label>
+                                <div class="pw">
+                                    <input type="password" class="form-control" id="loginPassword" name="password"
+                                       [(ngModel)]="loginObj.password" placeholder="Your password" autocomplete="current-password" required>
+                                    <button type="button" class="eye" data-eye="loginPassword">Show</button>
+                                </div>
+                                <div class="invalid-feedback">Please enter your password.</div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check"><input class="form-check-input" type="checkbox"
+                                        id="remember"><label class="form-check-label" for="remember">Remember me</label>
+                                </div>
+                                <a href="#">Forgot password?</a>
+                            </div>
+                            <button class="btn btn-main w-100" type="button" (click)="onLogin()">Login</button>
+                        </form>
+                        <p class="text-center muted mt-4 mb-0">New to FarmConnect? <a href="#register"
+                                data-go="register">Create an account</a></p>
+                    </section>
+
+                    <!-- REGISTER -->
+                    <section class="pane" id="pane-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+                        <h3 class="mb-1">Create your account</h3>
+                        <p class="muted mb-4">It takes less than a minute.</p>
+                        <form id="registerForm" class="needs-validation" novalidate>
+                            <!-- userId and createdAt are set automatically in the script -->
+                            <input type="hidden" name="userId" value="0">
+                            <input type="hidden" name="createdAt" id="createdAt">
+
+                            <div class="mb-3">
+                                <span class="form-label d-block">I am a</span>
+                                <!-- roleId values are an assumption: change them to match your roles table -->
+                                <div class="role-pick">
+                                    <div><input type="radio" name="roleId" id="role3" value="3" checked><label
+                                            for="role3">🛒 Customer</label></div>
+                                    <div><input type="radio" name="roleId" id="role2" value="2"><label for="role2">🧑‍🌾
+                                            Farmer</label></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Full name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Chetan Jogi"
+                                    autocomplete="name" required minlength="2">
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="chetan@gmail.com" autocomplete="email" required>
+                                    <div class="invalid-feedback">Enter a valid email.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="phone">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone"
+                                        placeholder="0099776655" autocomplete="tel" required pattern="[0-9+\-\s]{7,15}">
+                                    <div class="invalid-feedback">Enter a valid phone number.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <div class="pw">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="At least 6 characters" autocomplete="new-password" required
+                                        minlength="6">
+                                    <button type="button" class="eye" data-eye="password">Show</button>
+                                </div>
+                                <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="address">Address</label>
+                                <textarea class="form-control" id="address" name="address" rows="2" placeholder="Pune"
+                                    autocomplete="street-address" required></textarea>
+                                <div class="invalid-feedback">Please enter your address.</div>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">I agree to the <a href="#">Terms</a> and <a
+                                        href="#">Privacy Policy</a></label>
+                                <div class="invalid-feedback">You must agree to continue.</div>
+                            </div>
+                            <button class="btn btn-main w-100" type="submit">Create account</button>
+                        </form>
+                        <div id="payloadBox" class="mt-4" hidden>
+                            <div class="small muted mb-1">Static preview – this is the JSON your API will receive:</div>
+                            <pre class="payload" id="payload"></pre>
+                        </div>
+                        <p class="text-center muted mt-4 mb-0">Already have an account? <a href="#login"
+                                data-go="login">Login</a></p>
+                    </section>
+
+                </div>
+                <p class="text-center muted small mt-3 mb-0"><a href="index.html">← Back to home</a></p>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<script>
+    // ---- Toggle between Login and Register (also works with login.html#register) ----
+    const panes = { login: document.getElementById('pane-login'), register: document.getElementById('pane-register') };
+    const tabs = { login: document.getElementById('tab-login'), register: document.getElementById('tab-register') };
+    function show(which) {
+        for (const k in panes) { panes[k].hidden = k !== which; tabs[k].setAttribute('aria-selected', k === which) }
+        history.replaceState(null, '', '#' + which);
+    }
+    Object.keys(tabs).forEach(k => tabs[k].onclick = () => show(k));
+    document.querySelectorAll('[data-go]').forEach(a => a.onclick = e => { e.preventDefault(); show(a.dataset.go) });
+    show(location.hash === '#register' ? 'register' : 'login');
+
+    // ---- Show / hide password ----
+    document.querySelectorAll('.eye').forEach(b => b.onclick = () => {
+        const i = document.getElementById(b.dataset.eye), h = i.type === 'password';
+        i.type = h ? 'text' : 'password'; b.textContent = h ? 'Hide' : 'Show';
+    });
+
+    // ---- Validation helper ----
+    function check(form, e) {
+        if (!form.checkValidity()) { e.preventDefault(); e.stopPropagation(); form.classList.add('was-validated'); return false }
+        e.preventDefault(); return true;
+    }
+
+    // ---- Login submit ----
+    document.getElementById('loginForm').addEventListener('submit', e => {
+        if (!check(e.target, e)) return;
+        const data = { email: e.target.email.value.trim(), password: e.target.password.value };
+        console.log('LOGIN payload', data);
+        // TODO: connect to your API, e.g.
+        // fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+        alert('Static page: login payload logged in the browser console.');
+    });
+
+    // ---- Register submit: builds the exact JSON shape you gave ----
+    document.getElementById('registerForm').addEventListener('submit', e => {
+        if (!check(e.target, e)) return;
+        const f = e.target;
+        const payload = {
+            userId: 0,
+            name: f.name.value.trim(),
+            email: f.email.value.trim(),
+            password: f.password.value,
+            roleId: Number(f.roleId.value),
+            phone: f.phone.value.trim(),
+            address: f.address.value.trim(),
+            createdAt: new Date().toISOString()
+        };
+        console.log('REGISTER payload', payload);
+        document.getElementById('payload').textContent = JSON.stringify(payload, null, 2);
+        document.getElementById('payloadBox').hidden = false;
+        // TODO: connect to your API, e.g.
+        // fetch('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    });
+</script>

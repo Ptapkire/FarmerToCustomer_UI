@@ -3,6 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { UserLogin } from '../models/classes/User.Model';
 import { environment } from '../../../environments/environment';
 import { GlobalConstant } from '../constant/Constant';
+import { Observable } from 'rxjs';
+import { LoginResponse } from '../models/interfaces/api-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +15,11 @@ export class UserService {
 
   http = inject(HttpClient);
 
-  login(obj:UserLogin){
+  login(obj:UserLogin): Observable<LoginResponse>{
     // return this.http.post(this.apiUrl + "login",obj);
-    return this.http.post(this.apiUrl + GlobalConstant.API_ENDPOINTS.LOGIN,obj);
+    debugger;
+    console.log("success");
+    return this.http.post<LoginResponse>(this.apiUrl + GlobalConstant.API_ENDPOINTS.LOGIN,obj);  
   }  
 
   getUserById(id:number){

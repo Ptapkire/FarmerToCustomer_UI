@@ -1,0 +1,68 @@
+/* Avatar */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f4a261;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Name + role */
+.user-info { line-height: 1.2; }
+.user-name {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.user-role {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+}
+
+/* Log Out button */
+.btn-logout {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-logout:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+/* Cart icon with yellow badge */
+.cart-ico {
+  position: relative;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 0 6px;
+}
+.cart-ico .n {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 50px;
+  background: #f5b301;
+  color: #222;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
