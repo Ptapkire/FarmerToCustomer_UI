@@ -5,7 +5,7 @@ import { UserModel } from '../../../core/models/classes/User.Model';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })

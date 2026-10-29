@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonImports } from '../../core/constant/CommonImports';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonImports.FORM_IMPORTS, RouterLink],
+  imports: [CommonImports.FORM_IMPORTS],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Category } from './pages/category/category';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,7 @@ export const routes: Routes = [
     },
     {
         path : 'category',
-        component : Category
+        component : Category,
+        canActivate : [authGuard]  // we can have multiple guards.
     }
 ];
