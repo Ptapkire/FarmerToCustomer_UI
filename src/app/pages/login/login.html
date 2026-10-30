@@ -25,16 +25,18 @@
         <!-- RIGHT: forms -->
         <main class="main">
             <div class="box">
-                <div class="mbrand"><a class="brand" href="index.html">Farm<b>Connect</b></a></div>
+                <div class="mbrand">
+                    <a class="brand" href="index.html">Farm<b>Connect</b></a>
+                </div>
                 <div class="card-t">
-
                     <div class="toggle" role="tablist" aria-label="Choose form">
-                        <button type="button" role="tab" id="tab-login" aria-selected="true"
-                            aria-controls="pane-login">Login</button>
-                        <button type="button" role="tab" id="tab-register" aria-selected="false"
-                            aria-controls="pane-register">Register</button>
+                        <button type="button" [ngClass]="{'active': isLoginFormVisiable()}" role="tab" id="tab-login" 
+                            aria-controls="pane-login" (click)="onToggleForm(true)">Login</button>
+                        <button type="button"[ngClass]="{'active': !isLoginFormVisiable()}"role="tab" id="tab-register" 
+                            aria-controls="pane-register" (click)="onToggleForm(false)">Register</button>
                     </div>
 
+                    @if(isLoginFormVisiable()){
                     <!-- LOGIN -->
                     <section class="pane" id="pane-login" role="tabpanel" aria-labelledby="tab-login">
                         <h3 class="mb-1">Welcome back</h3>
@@ -43,14 +45,16 @@
                             <div class="mb-3">
                                 <label class="form-label" for="loginEmail">Email</label>
                                 <input type="email" class="form-control" id="loginEmail" name="email"
-                                   [(ngModel)]="loginObj.email" placeholder="you@example.com" autocomplete="email" required>
+                                    [(ngModel)]="loginObj.email" placeholder="you@example.com" autocomplete="email"
+                                    required>
                                 <div class="invalid-feedback">Please enter a valid email.</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="loginPassword">Password</label>
                                 <div class="pw">
                                     <input type="password" class="form-control" id="loginPassword" name="password"
-                                       [(ngModel)]="loginObj.password" placeholder="Your password" autocomplete="current-password" required>
+                                        [(ngModel)]="loginObj.password" placeholder="Your password"
+                                        autocomplete="current-password" required>
                                     <button type="button" class="eye" data-eye="loginPassword">Show</button>
                                 </div>
                                 <div class="invalid-feedback">Please enter your password.</div>
@@ -66,9 +70,9 @@
                         <p class="text-center muted mt-4 mb-0">New to FarmConnect? <a href="#register"
                                 data-go="register">Create an account</a></p>
                     </section>
-
+                    }@else{
                     <!-- REGISTER -->
-                    <section class="pane" id="pane-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+                    <section class="pane" id="pane-register" role="tabpanel" aria-labelledby="tab-register">
                         <h3 class="mb-1">Create your account</h3>
                         <p class="muted mb-4">It takes less than a minute.</p>
                         <form id="registerForm" class="needs-validation" novalidate>
@@ -138,6 +142,7 @@
                         <p class="text-center muted mt-4 mb-0">Already have an account? <a href="#login"
                                 data-go="login">Login</a></p>
                     </section>
+                    }
 
                 </div>
                 <p class="text-center muted small mt-3 mb-0"><a href="index.html">← Back to home</a></p>
@@ -145,60 +150,3 @@
         </main>
     </div>
 </div>
-
-
-<script>
-    // ---- Toggle between Login and Register (also works with login.html#register) ----
-    const panes = { login: document.getElementById('pane-login'), register: document.getElementById('pane-register') };
-    const tabs = { login: document.getElementById('tab-login'), register: document.getElementById('tab-register') };
-    function show(which) {
-        for (const k in panes) { panes[k].hidden = k !== which; tabs[k].setAttribute('aria-selected', k === which) }
-        history.replaceState(null, '', '#' + which);
-    }
-    Object.keys(tabs).forEach(k => tabs[k].onclick = () => show(k));
-    document.querySelectorAll('[data-go]').forEach(a => a.onclick = e => { e.preventDefault(); show(a.dataset.go) });
-    show(location.hash === '#register' ? 'register' : 'login');
-
-    // ---- Show / hide password ----
-    document.querySelectorAll('.eye').forEach(b => b.onclick = () => {
-        const i = document.getElementById(b.dataset.eye), h = i.type === 'password';
-        i.type = h ? 'text' : 'password'; b.textContent = h ? 'Hide' : 'Show';
-    });
-
-    // ---- Validation helper ----
-    function check(form, e) {
-        if (!form.checkValidity()) { e.preventDefault(); e.stopPropagation(); form.classList.add('was-validated'); return false }
-        e.preventDefault(); return true;
-    }
-
-    // ---- Login submit ----
-    document.getElementById('loginForm').addEventListener('submit', e => {
-        if (!check(e.target, e)) return;
-        const data = { email: e.target.email.value.trim(), password: e.target.password.value };
-        console.log('LOGIN payload', data);
-        // TODO: connect to your API, e.g.
-        // fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-        alert('Static page: login payload logged in the browser console.');
-    });
-
-    // ---- Register submit: builds the exact JSON shape you gave ----
-    document.getElementById('registerForm').addEventListener('submit', e => {
-        if (!check(e.target, e)) return;
-        const f = e.target;
-        const payload = {
-            userId: 0,
-            name: f.name.value.trim(),
-            email: f.email.value.trim(),
-            password: f.password.value,
-            roleId: Number(f.roleId.value),
-            phone: f.phone.value.trim(),
-            address: f.address.value.trim(),
-            createdAt: new Date().toISOString()
-        };
-        console.log('REGISTER payload', payload);
-        document.getElementById('payload').textContent = JSON.stringify(payload, null, 2);
-        document.getElementById('payloadBox').hidden = false;
-        // TODO: connect to your API, e.g.
-        // fetch('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-    });
-</script>

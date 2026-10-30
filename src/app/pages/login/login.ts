@@ -1,15 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { UserLogin } from '../../core/models/classes/User.Model';
 import { UserService } from '../../core/services/user-service';
-import { Roles } from '../../core/enums/Roles.enum';
 import { CommonImports } from '../../core/constant/CommonImports';
 import { LoginResponse } from '../../core/models/interfaces/api-response.model';
 import { Router } from '@angular/router';
 import { GlobalConstant } from '../../core/constant/Constant';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonImports.FORM_IMPORTS],
+  imports: [CommonImports.FORM_IMPORTS, NgClass],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -19,7 +19,11 @@ export class Login {
     router = inject(Router);
 
     loginObj : UserLogin = new UserLogin();
+    isLoginFormVisiable = signal<boolean>(false); 
 
+    onToggleForm(isShow: boolean){
+      this.isLoginFormVisiable.set(isShow);
+    }
     onLogin(){
       debugger;
        this.userSrv.login(this.loginObj).subscribe({
