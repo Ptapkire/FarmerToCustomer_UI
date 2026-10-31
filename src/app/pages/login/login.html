@@ -30,10 +30,11 @@
                 </div>
                 <div class="card-t">
                     <div class="toggle" role="tablist" aria-label="Choose form">
-                        <button type="button" [ngClass]="{'active': isLoginFormVisiable()}" role="tab" id="tab-login" 
+                        <button type="button" [ngClass]="{'active': isLoginFormVisiable()}" role="tab" id="tab-login"
                             aria-controls="pane-login" (click)="onToggleForm(true)">Login</button>
-                        <button type="button"[ngClass]="{'active': !isLoginFormVisiable()}"role="tab" id="tab-register" 
-                            aria-controls="pane-register" (click)="onToggleForm(false)">Register</button>
+                        <button type="button" [ngClass]="{'active': !isLoginFormVisiable()}" role="tab"
+                            id="tab-register" aria-controls="pane-register"
+                            (click)="onToggleForm(false)">Register</button>
                     </div>
 
                     @if(isLoginFormVisiable()){
@@ -111,16 +112,28 @@
                                     <div class="invalid-feedback">Enter a valid phone number.</div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="password">Password</label>
-                                <div class="pw">
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="At least 6 characters" autocomplete="new-password" required
-                                        minlength="6">
-                                    <button type="button" class="eye" data-eye="password">Show</button>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="password">Password</label>
+                                    <div class="pw">
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="At least 6 characters" autocomplete="new-password" required
+                                            minlength="6">
+                                        <button type="button" class="eye" data-eye="password">Show</button>
+                                    </div>
+                                    <div class="invalid-feedback">Password must be at least 6 characters.</div>
                                 </div>
-                                <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="phone">Role</label>
+                                    <select class="form-select">
+                                        <option value="">Select Your Role</option>
+                                         @for(item of roleList(); track $index){
+                                            <option [value]="item.roleId">{{item.roleName}}</option>
+                                         }
+                                    </select>
+                                </div>
                             </div>
+
                             <div class="mb-3">
                                 <label class="form-label" for="address">Address</label>
                                 <textarea class="form-control" id="address" name="address" rows="2" placeholder="Pune"

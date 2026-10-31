@@ -2,7 +2,8 @@ export const GlobalConstant = {
      LOCAL_LOGIN_KEY: 'farmerLoginData',
      API_ENDPOINTS: {
         LOGIN : 'farmerUsers/login',
-        GET_USER_BY_ID : 'getUserbyId?id='
+        GET_USER_BY_ID : 'getUserbyId?id=',
+        GET_ALL_ROLES : 'farmerRoles/get-all-roles'
      },
      // Static messages basically using for forms
      VALIDATION_MESSAGES:{

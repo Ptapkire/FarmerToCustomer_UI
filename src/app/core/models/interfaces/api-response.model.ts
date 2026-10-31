@@ -5,3 +5,13 @@ export interface LoginResponse {
     message : string;
     token : string;
 }
+
+export interface ApiResponseModel {
+    data : any;
+    message : string;
+}
+
+export interface IRole{
+    roleId : number;
+    roleName : string;
+}
