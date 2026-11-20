@@ -76,40 +76,27 @@
                     <section class="pane" id="pane-register" role="tabpanel" aria-labelledby="tab-register">
                         <h3 class="mb-1">Create your account</h3>
                         <p class="muted mb-4">It takes less than a minute.</p>
-                        <form id="registerForm" class="needs-validation" novalidate>
-                            <!-- userId and createdAt are set automatically in the script -->
-                            <input type="hidden" name="userId" value="0">
-                            <input type="hidden" name="createdAt" id="createdAt">
-
-                            <div class="mb-3">
-                                <span class="form-label d-block">I am a</span>
-                                <!-- roleId values are an assumption: change them to match your roles table -->
-                                <div class="role-pick">
-                                    <div><input type="radio" name="roleId" id="role3" value="3" checked><label
-                                            for="role3">🛒 Customer</label></div>
-                                    <div><input type="radio" name="roleId" id="role2" value="2"><label for="role2">🧑‍🌾
-                                            Farmer</label></div>
-                                </div>
-                            </div>
+                        <form id="registerForm" class="needs-validation" [formGroup]="registerForm"
+                            (ngSubmit)="onRegister()" novalidate>
 
                             <div class="mb-3">
                                 <label class="form-label" for="name">Full name</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Chetan Jogi"
-                                    autocomplete="name" required minlength="2">
-                                <div class="invalid-feedback">Please enter your name.</div>
+                                    formControlName="name" autocomplete="name" required minlength="2">
+                                <div class="invalid-feedback" [class.d-block]="registerForm.controls.name.touched && registerForm.controls.name.invalid">Please enter your name.</div>
                             </div>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label" for="email">Email</label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="chetan@gmail.com" autocomplete="email" required>
-                                    <div class="invalid-feedback">Enter a valid email.</div>
+                                        formControlName="email" placeholder="chetan@gmail.com" autocomplete="email" required>
+                                    <div class="invalid-feedback" [class.d-block]="registerForm.controls.email.touched && registerForm.controls.email.invalid">Enter a valid email.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="phone">Phone</label>
                                     <input type="tel" class="form-control" id="phone" name="phone"
-                                        placeholder="0099776655" autocomplete="tel" required pattern="[0-9+\-\s]{7,15}">
-                                    <div class="invalid-feedback">Enter a valid phone number.</div>
+                                        formControlName="phone" placeholder="0099776655" autocomplete="tel" required pattern="[0-9+\-\s]{7,15}">
+                                    <div class="invalid-feedback" [class.d-block]="registerForm.controls.phone.touched && registerForm.controls.phone.invalid">Enter a valid phone number.</div>
                                 </div>
                             </div>
                             <div class="row g-3 mb-3">
@@ -117,28 +104,29 @@
                                     <label class="form-label" for="password">Password</label>
                                     <div class="pw">
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="At least 6 characters" autocomplete="new-password" required
+                                            formControlName="password" placeholder="At least 6 characters" autocomplete="new-password" required
                                             minlength="6">
                                         <button type="button" class="eye" data-eye="password">Show</button>
                                     </div>
-                                    <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                                    <div class="invalid-feedback" [class.d-block]="registerForm.controls.password.touched && registerForm.controls.password.invalid">Password must be at least 6 characters.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="phone">Role</label>
-                                    <select class="form-select">
-                                        <option value="">Select Your Role</option>
+                                    <label class="form-label" for="roleId">Role</label>
+                                    <select class="form-select" id="roleId" formControlName="roleId">
+                                        <option [ngValue]="0">Select Your Role</option>
                                          @for(item of roleList(); track $index){
-                                            <option [value]="item.roleId">{{item.roleName}}</option>
+                                            <option [ngValue]="item.roleId">{{item.roleName}}</option>
                                          }
                                     </select>
+                                    <div class="invalid-feedback" [class.d-block]="registerForm.controls.roleId.touched && registerForm.controls.roleId.invalid">Select a role.</div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="address">Address</label>
                                 <textarea class="form-control" id="address" name="address" rows="2" placeholder="Pune"
-                                    autocomplete="street-address" required></textarea>
-                                <div class="invalid-feedback">Please enter your address.</div>
+                                    formControlName="address" autocomplete="street-address" required></textarea>
+                                <div class="invalid-feedback" [class.d-block]="registerForm.controls.address.touched && registerForm.controls.address.invalid">Please enter your address.</div>
                             </div>
                             <div class="form-check mb-4">
                                 <input class="form-check-input" type="checkbox" id="terms" required>
@@ -148,10 +136,12 @@
                             </div>
                             <button class="btn btn-main w-100" type="submit">Create account</button>
                         </form>
-                        <div id="payloadBox" class="mt-4" hidden>
-                            <div class="small muted mb-1">Static preview – this is the JSON your API will receive:</div>
-                            <pre class="payload" id="payload"></pre>
-                        </div>
+                        @if(registerMessage()) {
+                            <p class="text-success mt-3" role="status">{{registerMessage()}}</p>
+                        }
+                        @if(registerError()) {
+                            <p class="text-danger mt-3" role="alert">{{registerError()}}</p>
+                        }
                         <p class="text-center muted mt-4 mb-0">Already have an account? <a href="#login"
                                 data-go="login">Login</a></p>
                     </section>
