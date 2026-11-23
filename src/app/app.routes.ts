@@ -4,6 +4,8 @@ import { Login } from './pages/login/login';
 import { Category } from './pages/category/category';
 import { authGuard } from './core/guards/auth-guard';
 import { beforeDeactiveGuardGuard } from './core/guards/before-deactive-guard-guard';
+import { Master } from './pages/master/master';
+import { Product } from './pages/product/product';
 
 export const routes: Routes = [
     {
@@ -20,9 +22,19 @@ export const routes: Routes = [
         component : Login
     },
     {
-        path : 'category',
-        component : Category,
-        canActivate : [authGuard],  // we can have multiple guards.
-        canDeactivate : [beforeDeactiveGuardGuard]
+        path : 'master',
+        component : Master,
+        canActivate:[authGuard]
+    },
+    {
+        path: 'product',
+        component: Product,
+        canActivate: [authGuard]
     }
+    // {
+    //     path : 'category',
+    //     component : Category,
+    //     canActivate : [authGuard],  // we can have multiple guards.
+    //     canDeactivate : [beforeDeactiveGuardGuard]
+    // }
 ];

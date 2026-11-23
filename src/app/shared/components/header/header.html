@@ -6,10 +6,12 @@
         <a class="nav-l" href="#">Home</a>
         <a class="nav-l" href="#shop">Products</a>
         <a class="nav-l" href="#roles">Farmers</a>
-        <a class="nav-l" routerLink = "/category">Categories</a>
-        <a class="nav-l" href="#footer">About</a>
-      </div>
 
+        @if(loggedUserData.userId != 0){
+          <a class="nav-l" routerLink = "/master">Master</a>
+          <a class="nav-l" routerLink = "/product">Product</a>
+        }       
+      </div>
     
       @if(loggedUserData.userId != 0){
         <div id="userBox" class="d-flex align-items-center gap-3">

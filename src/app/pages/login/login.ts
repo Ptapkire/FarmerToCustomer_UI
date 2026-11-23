@@ -7,7 +7,7 @@ import { ApiResponseModel, IRole, LoginResponse } from '../../core/models/interf
 import { Router } from '@angular/router';
 import { GlobalConstant } from '../../core/constant/Constant';
 import { NgClass } from '@angular/common';
-import { Master } from '../../core/services/master';
+import { MasterService } from '../../core/services/master';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class Login {
 
   userSrv = inject(UserService);
   router = inject(Router);
-  masterSrv = inject(Master);
+  masterSrv = inject(MasterService);
   private formBuilder = inject(FormBuilder);
 
   loginObj: UserLogin = new UserLogin();
@@ -33,7 +33,7 @@ export class Login {
   });
   registerMessage = signal('');
   registerError = signal('');
-  isLoginFormVisiable = signal<boolean>(true);
+  isLoginFormVisiable = signal<boolean>(false);
   roleList = signal<IRole[]>([]);
 
   getAllRoles() {

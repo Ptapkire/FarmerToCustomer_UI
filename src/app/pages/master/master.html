@@ -1,0 +1,147 @@
+<main class="master-page">
+  <div class="container">
+    <header class="master-heading text-center mx-auto mb-4">
+      <div class="master-kicker mb-2">ADMINISTRATION · MASTER DATA</div>
+      <h1 class="mb-2">Manage roles &amp; categories</h1>
+      <p class="muted mb-0">Create and maintain the core data that keeps your farm-to-customer portal organized.</p>
+    </header>
+
+    <div class="text-center">
+      <fieldset class="border-0 p-0 m-0 d-inline-block" aria-label="Choose master data">
+        <input class="master-tab-input master-tab-input--roles" type="radio" name="master-data-view"
+          id="master-roles-tab" checked>
+        <label class="master-tab" for="master-roles-tab">Roles</label>
+        <input class="master-tab-input master-tab-input--categories" type="radio" name="master-data-view"
+          id="master-categories-tab">
+        <label class="master-tab" for="master-categories-tab">Categories</label>
+
+        <div class="master-panels text-start">
+          <section class="master-panel master-panel--roles" aria-labelledby="roles-heading">
+            <div class="master-panel-heading d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div>
+                <h2 class="h4 mb-1" id="roles-heading">Role management</h2>
+                <p class="muted mb-0">Define the access roles used across your portal.</p>
+              </div>
+              <span class="chip">3 roles</span>
+            </div>
+
+            <form class="master-form" [formGroup]="roleForm">
+              <h3 class="h6 mb-3">Add or edit a role</h3>
+              <div class="row g-3 align-items-end">
+                <div class="col-sm-4 col-lg-3">
+                  <label class="form-label" for="role-id">Role ID</label>
+                  <input class="form-control master-id" id="role-id" name="roleId" type="number" value="0" readonly>
+                  <div class="form-text">Assigned automatically for new roles.</div>
+                </div>
+                <div class="col-sm-8 col-lg-6">
+                  <label class="form-label" for="role-name">Role name</label>
+                  <input class="form-control" id="role-name" name="roleName" formControlName="roleName" type="text"
+                    placeholder="Enter role" autocomplete="off">
+                </div>
+                <div class="col-lg-3 d-flex gap-2">
+                  <button class="btn btn-cta flex-grow-1" type="button" (click)="onSaveRole()">Save role</button>
+                  <button class="btn btn-viewall" type="reset" (click)="onUpdateRole()">Update</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="master-table-wrap">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <h3 class="h6 mb-0">Existing roles</h3>
+                <span class="muted small">Showing 3 records</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table master-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Role ID</th>
+                      <th scope="col">Role name</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for(item of roleList(); track $index){
+                    <tr>
+                      <td>{{$index + 1}}</td>
+                      <td class="fw-bold">{{item.roleName}}</td>
+                      <td class="text-end text-nowrap">
+                        <button class="master-action" type="button" aria-label="Edit Super Admin role" (click)="onRoleEdit(item)">Edit</button>
+                        <button class="master-action master-action--delete ms-2" type="button"
+                          aria-label="Delete Super Admin role">Delete</button>
+                      </td>
+                    </tr>
+                    }                                      
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="master-panel master-panel--categories" aria-labelledby="categories-heading">
+            <div class="master-panel-heading d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div>
+                <h2 class="h4 mb-1" id="categories-heading">Category management</h2>
+                <p class="muted mb-0">Organize the fresh produce available in the marketplace.</p>
+              </div>
+              <span class="chip">4 categories</span>
+            </div>
+
+            <form class="master-form" [formGroup]="categoryForm">
+              <h3 class="h6 mb-3">Add or edit a category</h3>
+              <div class="row g-3 align-items-end">
+                <div class="col-sm-4 col-lg-3">
+                  <label class="form-label" for="category-id">Category ID</label>
+                  <input class="form-control master-id" id="category-id" name="categoryId" type="number" value="0"
+                    readonly>
+                  <div class="form-text">Assigned automatically for new categories.</div>
+                </div>
+                <div class="col-sm-8 col-lg-6">
+                  <label class="form-label" for="category-name">Category name</label>
+                  <input class="form-control" id="category-name" name="name" type="text" formControlName="name"
+                    placeholder="Enter Category like &amp; herbs" autocomplete="off">
+                </div>
+                <div class="col-lg-3 d-flex gap-2">
+                  <button class="btn btn-cta flex-grow-1" type="button" (click)="onSaveCategory()">Save
+                    category</button>
+                  <button class="btn btn-viewall" type="reset">Clear</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="master-table-wrap">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <h3 class="h6 mb-0">Existing categories</h3>
+                <span class="muted small">Showing 4 records</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table master-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Category ID</th>
+                      <th scope="col">Category name</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for(item of categoryList(); track $index){
+                    <tr>
+                      <td>{{$index + 1}}</td>
+                      <td class="fw-bold">{{item.name}}</td>
+                      <td class="text-end text-nowrap">
+                        <button class="master-action" type="button" aria-label="Edit Super Admin role">Edit</button>
+                        <button class="master-action master-action--delete ms-2" type="button"
+                          aria-label="Delete Super Admin role">Delete</button>
+                      </td>
+                    </tr>
+                    }
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</main>

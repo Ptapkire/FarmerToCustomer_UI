@@ -4,16 +4,28 @@ import { environment } from '../../../environments/environment';
 import { GlobalConstant } from '../constant/Constant';
 import { Observable } from 'rxjs';
 import { ApiResponseModel } from '../models/interfaces/api-response.model';
+import { Category, Role } from '../models/classes/Master.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Master {
+export class MasterService {
 
   http = inject(HttpClient);
 
   getAllRoles(): Observable<ApiResponseModel>{
     return this.http.get<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.GET_ALL_ROLES);
   }
-  
+
+  createRole(roleObj: Role): Observable<ApiResponseModel>{
+    return this.http.post<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.CREATE_ROLE, roleObj);
+  }
+
+  createCategory(categoryObj: Category): Observable<ApiResponseModel>{
+    return this.http.post<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.CREATE_CATEGORY, categoryObj);
+  }
+
+  getAllCategory(): Observable<ApiResponseModel>{
+    return this.http.get<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.GET_ALL_CATEGORY);
+  }
 }
