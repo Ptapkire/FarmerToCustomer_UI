@@ -80,7 +80,18 @@ export class Master implements OnInit {
    }
 
    onUpdateRole(){
-      
+      debugger;
+      const formValue = this.roleForm.value;
+      this.master.updateRole(formValue).subscribe({
+        next: (res: ApiResponseModel)=>{
+          alert("Updated Role Successfully");
+          this.getAllRoles();
+        }
+      });
+   }
+
+   onCategoryEdit(categoryData : Category){
+      this.categoryForm.setValue(categoryData);
    }
    onSaveCategory(){
       debugger;
@@ -88,6 +99,16 @@ export class Master implements OnInit {
       this.master.createCategory(formValue).subscribe({
         next: (res: ApiResponseModel)=>{
           alert("Saved Category Successfully");
+          this.getAllCategory();
+        }
+      });
+   }
+
+   onUpdateCategory(){
+     const formValue = this.categoryForm.value;
+      this.master.updateCategory(formValue).subscribe({
+        next: (res: ApiResponseModel)=>{
+          alert("Updated Category Successfully");
           this.getAllCategory();
         }
       });

@@ -20,7 +20,13 @@ export class MasterService {
   createRole(roleObj: Role): Observable<ApiResponseModel>{
     return this.http.post<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.CREATE_ROLE, roleObj);
   }
+  updateRole(roleObj: Role): Observable<ApiResponseModel>{
+    return this.http.put<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.UPDATE_ROLE + roleObj.roleId, roleObj);
+  }
 
+  updateCategory(categoryObj: Category): Observable<ApiResponseModel>{
+    return this.http.put<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.UPDATE_CATEGORY + categoryObj.categoryId, categoryObj);
+  }
   createCategory(categoryObj: Category): Observable<ApiResponseModel>{
     return this.http.post<ApiResponseModel>(environment.API_URL + GlobalConstant.API_ENDPOINTS.CREATE_CATEGORY, categoryObj);
   }

@@ -8,8 +8,8 @@ export const GlobalConstant = {
         CREATE_ROLE : 'farmerRoles/create-role',
         GET_ALL_CATEGORY : 'farmerCategories/get-all-categories',
         CREATE_CATEGORY : 'farmerCategories/create-category',
-        UPDATE_ROLE: 'farmerRoles/update-role',
-        UPDATE_CATEGORY: 'farmerCategories/update-category/1'
+        UPDATE_ROLE: 'farmerRoles/update-role/',
+        UPDATE_CATEGORY: 'farmerCategories/update-category/'
       },
      // Static messages basically using for forms
      VALIDATION_MESSAGES:{
